@@ -28,7 +28,8 @@ export function WalletCard({ network, hint, address, accent = "emerald" }: Props
   };
 
   return (
-    <div className="surface-card relative overflow-hidden rounded-3xl p-6 sm:p-8">
+    <div className="surface-card relative h-full overflow-hidden rounded-3xl p-6 transition-transform duration-500 hover:-translate-y-1 sm:p-8">
+      <div className="halo pointer-events-none absolute -bottom-24 -right-16 size-56 rounded-full bg-gold/10 blur-3xl" />
       <div
         className={`pointer-events-none absolute -top-24 -left-16 size-56 rounded-full bg-gradient-to-br ${ring} opacity-20 blur-3xl`}
       />

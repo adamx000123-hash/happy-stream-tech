@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import logo from "@/assets/legend-logo.png.asset.json";
 import { WalletCard } from "@/components/WalletCard";
 import { MusicPlayer } from "@/components/MusicPlayer";
+import { WelcomeGate } from "@/components/WelcomeGate";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -24,8 +27,12 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const [entered, setEntered] = useState(false);
+
   return (
     <main dir="rtl" className="relative min-h-screen overflow-hidden bg-background">
+      <WelcomeGate onEnter={() => setEntered(true)} />
+
       <div className="veil pointer-events-none absolute inset-x-0 top-0 h-[80vh]" />
       <div className="grid-glow pointer-events-none absolute inset-0 opacity-[0.16]" />
 
@@ -89,7 +96,7 @@ function Index() {
         <p className="mt-3 text-xs tracking-[0.35em] text-gold">LEGEND</p>
       </footer>
 
-      <MusicPlayer />
+      <MusicPlayer started={entered} />
     </main>
   );
 }

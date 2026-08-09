@@ -44,7 +44,17 @@ export function MusicPlayer({ started = false }: { started?: boolean }) {
 
   return (
     <div className="fixed bottom-4 left-4 z-50 animate-fade-in" dir="rtl">
-      <audio ref={audioRef} src={current.src} onEnded={next} loop={tracks.length === 1} />
+      <audio
+        ref={audioRef}
+        src={current.src}
+        preload="auto"
+        onEnded={next}
+        onError={() => {
+          setBlocked(true);
+          setPlaying(false);
+        }}
+        loop={tracks.length === 1}
+      />
 
       <div className="surface-card flex items-center gap-1.5 rounded-full px-2 py-1.5 backdrop-blur-md">
         <button

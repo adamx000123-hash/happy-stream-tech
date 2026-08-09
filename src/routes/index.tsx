@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import logo from "@/assets/legend-logo.png.asset.json";
 import { WalletCard } from "@/components/WalletCard";
 import { MusicPlayer } from "@/components/MusicPlayer";
 import { WelcomeGate } from "@/components/WelcomeGate";
@@ -40,7 +39,7 @@ function Index() {
         <div className="emblem-reveal relative mx-auto w-fit">
           <div className="halo absolute inset-0 -z-10 rounded-full bg-gold/25 blur-3xl" />
           <img
-            src={logo.url}
+            src="/assets/legend-logo.png"
             alt="شعار LEGEND"
             className="float-soft mx-auto size-40 object-contain drop-shadow-[0_0_28px_color-mix(in_oklab,var(--gold)_35%,transparent)] sm:size-56"
           />

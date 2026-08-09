@@ -1,12 +1,10 @@
-import relaxingClassical from "@/assets/relaxing-classical.mp3.asset.json";
-
 export type Track = {
   title: string;
-  /** URL to an audio file (CDN asset, /public path, or remote https URL). */
+  /** URL to an audio file served from the same deployment. */
   src: string;
 };
 
 /** قائمة الموسيقى الخلفية. */
 export const tracks: Track[] = [
-  { title: "Relaxing Classical", src: relaxingClassical.url },
+  { title: "Relaxing Classical", src: "/assets/relaxing-classical.mp3" },
 ];

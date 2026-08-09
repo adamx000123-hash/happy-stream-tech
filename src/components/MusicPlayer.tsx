@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Music2, Pause, Play, SkipForward, Volume2, VolumeX } from "lucide-react";
 import { tracks } from "@/lib/tracks";
 
-export function MusicPlayer() {
+export function MusicPlayer({ started = false }: { started?: boolean }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -10,10 +10,10 @@ export function MusicPlayer() {
 
   const current = tracks[index];
 
-  // تشغيل تلقائي بصوت مناسب
+  // التشغيل يبدأ فقط بعد تفاعل المستخدم (زر الترحيب) لتخطي قيود المتصفح
   useEffect(() => {
     const el = audioRef.current;
-    if (!el || !current) return;
+    if (!el || !current || !started) return;
     el.volume = 0.25;
     el.play()
       .then(() => {
@@ -24,24 +24,8 @@ export function MusicPlayer() {
         setPlaying(false);
         setBlocked(true);
       });
-  }, [index, current]);
+  }, [index, current, started]);
 
-  // بعض المتصفحات تمنع التشغيل التلقائي: نبدأ عند أول تفاعل
-  useEffect(() => {
-    if (!blocked) return;
-    const start = () => {
-      audioRef.current?.play().then(() => {
-        setPlaying(true);
-        setBlocked(false);
-      }).catch(() => {});
-    };
-    window.addEventListener("pointerdown", start, { once: true });
-    window.addEventListener("keydown", start, { once: true });
-    return () => {
-      window.removeEventListener("pointerdown", start);
-      window.removeEventListener("keydown", start);
-    };
-  }, [blocked]);
 
   if (!current) return null;
 

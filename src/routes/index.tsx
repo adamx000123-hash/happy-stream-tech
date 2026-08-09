@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import logo from "@/assets/legend-logo.png.asset.json";
 import { WalletCard } from "@/components/WalletCard";
 import { MusicPlayer } from "@/components/MusicPlayer";
+import { WelcomeGate } from "@/components/WelcomeGate";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({

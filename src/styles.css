@@ -142,10 +142,85 @@
 
 @utility grid-glow {
   background-image:
-    linear-gradient(color-mix(in oklab, var(--gold) 12%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in oklab, var(--gold) 12%, transparent) 1px, transparent 1px);
+    linear-gradient(color-mix(in oklab, var(--gold) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--gold) 10%, transparent) 1px, transparent 1px);
   background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse at 50% 0%, black, transparent 70%);
+  /* الشبكة تظهر فقط أسفل الصفحة حتى لا تمر خطوط بجانب الشعار */
+  mask-image: linear-gradient(to bottom, transparent 0%, transparent 42%, black 68%, transparent 100%);
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes emblem-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes halo-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -6px, 0);
+  }
+}
+
+@utility reveal {
+  opacity: 0;
+  animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: transform, opacity;
+}
+
+@utility emblem-reveal {
+  opacity: 0;
+  animation: emblem-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: transform, opacity;
+}
+
+@utility halo {
+  animation: halo-pulse 6s ease-in-out infinite;
+}
+
+@utility float-soft {
+  animation: float-soft 7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
 
 

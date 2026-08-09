@@ -27,8 +27,12 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const [entered, setEntered] = useState(false);
+
   return (
     <main dir="rtl" className="relative min-h-screen overflow-hidden bg-background">
+      <WelcomeGate onEnter={() => setEntered(true)} />
+
       <div className="veil pointer-events-none absolute inset-x-0 top-0 h-[80vh]" />
       <div className="grid-glow pointer-events-none absolute inset-0 opacity-[0.16]" />
 

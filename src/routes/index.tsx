@@ -96,7 +96,7 @@ function Index() {
         <p className="mt-3 text-xs tracking-[0.35em] text-gold">LEGEND</p>
       </footer>
 
-      <MusicPlayer />
+      <MusicPlayer started={entered} />
     </main>
   );
 }

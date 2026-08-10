@@ -14,16 +14,99 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      supporter_messages: {
+        Row: {
+          admin_note: string | null
+          consent_publish: boolean
+          created_at: string
+          display_name: string
+          id: string
+          is_pinned: boolean
+          is_verified_supporter: boolean
+          message: string
+          status: string
+          tx_reference: string | null
+          updated_at: string
+          wants_verified: boolean
+        }
+        Insert: {
+          admin_note?: string | null
+          consent_publish?: boolean
+          created_at?: string
+          display_name: string
+          id?: string
+          is_pinned?: boolean
+          is_verified_supporter?: boolean
+          message: string
+          status?: string
+          tx_reference?: string | null
+          updated_at?: string
+          wants_verified?: boolean
+        }
+        Update: {
+          admin_note?: string | null
+          consent_publish?: boolean
+          created_at?: string
+          display_name?: string
+          id?: string
+          is_pinned?: boolean
+          is_verified_supporter?: boolean
+          message?: string
+          status?: string
+          tx_reference?: string | null
+          updated_at?: string
+          wants_verified?: boolean
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_public_messages: {
+        Args: never
+        Returns: {
+          created_at: string
+          display_name: string
+          id: string
+          is_pinned: boolean
+          is_verified_supporter: boolean
+          message: string
+        }[]
+      }
+      get_verified_supporters_count: { Args: never; Returns: number }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "moderator" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +233,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "moderator", "user"],
+    },
   },
 } as const

@@ -1,26 +1,33 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { WalletCard } from "@/components/WalletCard";
+import { Heart, MessagesSquare } from "lucide-react";
 import { MusicPlayer } from "@/components/MusicPlayer";
 import { WelcomeGate } from "@/components/WelcomeGate";
+import { SiteNav, scrollToSection } from "@/components/SiteNav";
+import { GoalSection } from "@/components/GoalSection";
+import { SupportSection } from "@/components/SupportSection";
+import { MessagesSection } from "@/components/MessagesSection";
+import { GratitudeSection } from "@/components/GratitudeSection";
+import { FaqSection } from "@/components/FaqSection";
 
+const title = "LEGEND — ساعدني على بناء محطة التداول الخاصة بي";
+const description =
+  "صفحة دعم شخصية لشراء حاسوب مخصص للتداول. دعم عبر USDT على شبكتي BEP20 و APTOS، مع رسائل الداعمين وأسئلة شائعة.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "LEGEND — ادعم شراء حاسوب التداول" },
-      {
-        name: "description",
-        content: "ادعم LEGEND لشراء حاسوب مناسب لتداول الفوريكس عبر USDT على شبكتي BEP20 و APTOS.",
-      },
-      { property: "og:title", content: "LEGEND — ادعم شراء حاسوب التداول" },
-      {
-        property: "og:description",
-        content: "ادعم LEGEND لشراء حاسوب التداول عبر USDT (BEP20 / APTOS).",
-      },
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://happy-stream-tech.lovable.app/" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
     ],
+    links: [{ rel: "canonical", href: "https://happy-stream-tech.lovable.app/" }],
   }),
   component: Index,
 });
@@ -29,73 +36,79 @@ function Index() {
   const [entered, setEntered] = useState(false);
 
   return (
-    <main dir="rtl" className="relative min-h-screen overflow-hidden bg-background">
-      <WelcomeGate onEnter={() => setEntered(true)} />
+    <div dir="rtl" className="relative min-h-dvh overflow-hidden bg-background">
+      <WelcomeGate onEnter={(withMusic) => setEntered(withMusic)} />
+      <SiteNav />
 
       <div className="veil pointer-events-none absolute inset-x-0 top-0 h-[80vh]" />
       <div className="grid-glow pointer-events-none absolute inset-0 opacity-[0.16]" />
 
-      <section className="relative mx-auto max-w-3xl px-5 pt-16 pb-8 text-center sm:pt-24">
-        <div className="emblem-reveal relative mx-auto w-fit">
-          <div className="halo absolute inset-0 -z-10 rounded-full bg-gold/25 blur-3xl" />
-          <img
-            src="/assets/legend-logo.png"
-            alt="شعار LEGEND"
-            className="float-soft mx-auto size-40 object-contain drop-shadow-[0_0_28px_color-mix(in_oklab,var(--gold)_35%,transparent)] sm:size-56"
-          />
-        </div>
-
-        <p
-          className="reveal mt-8 text-[11px] tracking-[0.5em] text-gold"
-          style={{ animationDelay: "220ms" }}
+      <main>
+        <section
+          id="hero"
+          className="relative mx-auto max-w-3xl scroll-mt-24 px-5 pt-28 pb-10 text-center sm:pt-32"
         >
-          L E G E N D
-        </p>
-        <h1
-          className="reveal mt-4 text-3xl leading-tight font-extrabold sm:text-5xl"
-          style={{ animationDelay: "340ms" }}
-        >
-          ادعمني لشراء <span className="text-gradient-gold">حاسوب التداول</span>
-        </h1>
-      </section>
-
-      <section id="support" className="relative mx-auto max-w-4xl px-5 pt-4 pb-14">
-        <div className="grid gap-6 sm:grid-cols-2">
-          <div className="reveal" style={{ animationDelay: "480ms" }}>
-            <WalletCard
-              network="USDT — BEP20"
-              hint="شبكة BNB Smart Chain"
-              accent="emerald"
-              address="0x4e817ab10246f592c00434a4d2147e4f63348951"
+          <div className="emblem-reveal relative mx-auto w-fit">
+            <div className="halo absolute inset-0 -z-10 rounded-full bg-gold/25 blur-3xl" />
+            <img
+              src="/assets/legend-logo.png"
+              alt="شعار LEGEND"
+              width={224}
+              height={224}
+              className="float-soft mx-auto size-32 object-contain drop-shadow-[0_0_28px_color-mix(in_oklab,var(--gold)_35%,transparent)] sm:size-44"
             />
           </div>
-          <div className="reveal" style={{ animationDelay: "600ms" }}>
-            <WalletCard
-              network="USDT — APTOS"
-              hint="شبكة Aptos"
-              accent="cyan"
-              address="0x7a3a37ee388044b59cc04eeba56a933f2323da744fa893c01d2c413725a3c3d8"
-            />
+
+          <p className="reveal mt-6 text-[11px] tracking-[0.5em] text-gold" style={{ animationDelay: "180ms" }}>
+            L E G E N D
+          </p>
+
+          <h1
+            className="reveal mt-4 text-3xl leading-tight font-extrabold sm:text-5xl"
+            style={{ animationDelay: "280ms" }}
+          >
+            ساعدني على بناء <span className="text-gradient-gold">محطة التداول</span> الخاصة بي
+          </h1>
+
+          <p
+            className="reveal mx-auto mt-5 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base"
+            style={{ animationDelay: "380ms" }}
+          >
+            دعمك سيساعدني على شراء حاسوب مخصص لتداول الفوريكس، وعلى صناعة محتوى أفضل وأكثر انتظاماً.
+            لا ضغط ولا وعود مبالغ فيها — فقط امتنان صادق لكل من يقف بجانبي.
+          </p>
+
+          <div className="reveal mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row" style={{ animationDelay: "480ms" }}>
+            <button
+              onClick={() => scrollToSection("support")}
+              className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-8 text-base font-bold text-primary-foreground shadow-[var(--shadow-gold)] transition-transform hover:scale-[1.02] active:scale-95 sm:w-auto"
+            >
+              <Heart className="size-4" aria-hidden="true" />
+              أرغب في الدعم
+            </button>
+            <button
+              onClick={() => scrollToSection("community")}
+              className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-border bg-secondary/60 px-8 text-base font-bold text-foreground transition-transform hover:scale-[1.02] active:scale-95 sm:w-auto"
+            >
+              <MessagesSquare className="size-4" aria-hidden="true" />
+              شاهد رسائل الداعمين
+            </button>
           </div>
-        </div>
+        </section>
 
-        <p
-          className="reveal mt-8 text-center text-xs text-muted-foreground"
-          style={{ animationDelay: "720ms" }}
-        >
-          تأكد من اختيار الشبكة الصحيحة قبل الإرسال.
-        </p>
-      </section>
+        <GoalSection />
+        <SupportSection />
+        <MessagesSection />
+        <GratitudeSection />
+        <FaqSection />
+      </main>
 
-      <footer
-        className="reveal relative border-t border-border px-5 py-10 text-center"
-        style={{ animationDelay: "820ms" }}
-      >
+      <footer className="relative border-t border-border px-5 py-10 text-center">
         <p className="text-sm text-muted-foreground">حتى سنت واحد عندي فرق كبير ❤️</p>
         <p className="mt-3 text-xs tracking-[0.35em] text-gold">LEGEND</p>
       </footer>
 
       <MusicPlayer started={entered} />
-    </main>
+    </div>
   );
 }

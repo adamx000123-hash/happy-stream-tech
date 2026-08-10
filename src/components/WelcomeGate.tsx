@@ -1,21 +1,24 @@
 import { useState } from "react";
-import { Sparkles } from "lucide-react";
+import { ArrowLeft, VolumeX } from "lucide-react";
 
-export function WelcomeGate({ onEnter }: { onEnter: () => void }) {
+export function WelcomeGate({ onEnter }: { onEnter: (withMusic: boolean) => void }) {
   const [closing, setClosing] = useState(false);
   const [hidden, setHidden] = useState(false);
 
   if (hidden) return null;
 
-  const handle = () => {
-    onEnter();
+  const handle = (withMusic: boolean) => {
+    onEnter(withMusic);
     setClosing(true);
-    window.setTimeout(() => setHidden(true), 550);
+    window.setTimeout(() => setHidden(true), 500);
   };
 
   return (
     <div
       dir="rtl"
+      role="dialog"
+      aria-modal="true"
+      aria-label="شاشة الترحيب"
       className={`fixed inset-0 z-[100] grid place-items-center bg-background/95 backdrop-blur-xl transition-opacity duration-500 ${
         closing ? "pointer-events-none opacity-0" : "opacity-100"
       }`}
@@ -25,35 +28,41 @@ export function WelcomeGate({ onEnter }: { onEnter: () => void }) {
       <div className="relative mx-5 w-full max-w-md text-center">
         <div className="halo absolute inset-0 -z-10 rounded-full bg-gold/20 blur-3xl" />
 
-        <p
-          className="reveal text-[11px] tracking-[0.5em] text-gold"
-          style={{ animationDelay: "80ms" }}
-        >
+        <img
+          src="/assets/legend-logo.png"
+          alt="شعار LEGEND"
+          className="emblem-reveal mx-auto size-24 object-contain"
+        />
+
+        <p className="reveal mt-5 text-[11px] tracking-[0.5em] text-gold" style={{ animationDelay: "120ms" }}>
           L E G E N D
         </p>
 
-        <h2
-          className="reveal mt-5 text-4xl font-extrabold sm:text-5xl"
-          style={{ animationDelay: "220ms" }}
-        >
+        <h1 className="reveal mt-4 text-3xl font-extrabold sm:text-4xl" style={{ animationDelay: "240ms" }}>
           <span className="text-gradient-gold">السلام عليكم</span>
-        </h2>
+        </h1>
 
-        <p
-          className="reveal mt-4 text-sm text-muted-foreground"
-          style={{ animationDelay: "360ms" }}
-        >
-          مرحباً بك — اضغط للدخول وتشغيل الموسيقى
+        <p className="reveal mt-3 text-sm text-muted-foreground" style={{ animationDelay: "340ms" }}>
+          مرحباً بك — تفضّل بالدخول إلى صفحة الدعم
         </p>
 
-        <button
-          onClick={handle}
-          className="reveal hover-scale mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 text-base font-bold text-primary-foreground shadow-[var(--shadow-gold)] active:scale-95"
-          style={{ animationDelay: "500ms" }}
-        >
-          <Sparkles className="size-4" />
-          وعليكم السلام
-        </button>
+        <div className="reveal mt-8 flex flex-col items-center gap-3" style={{ animationDelay: "440ms" }}>
+          <button
+            onClick={() => handle(true)}
+            className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-8 text-base font-bold text-primary-foreground shadow-[var(--shadow-gold)] transition-transform hover:scale-[1.02] active:scale-95"
+          >
+            <ArrowLeft className="size-4" aria-hidden="true" />
+            ادخل إلى صفحة الدعم
+          </button>
+
+          <button
+            onClick={() => handle(false)}
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-6 text-sm text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <VolumeX className="size-4" aria-hidden="true" />
+            الدخول بدون موسيقى
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -115,15 +115,14 @@ export function MessagesSection() {
         </div>
       ) : (
         <div className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 sm:grid sm:grid-cols-2 sm:overflow-visible lg:grid-cols-3">
-          {messages.map((m, i) => (
-            <div key={m.id} className="reveal contents sm:block" style={{ animationDelay: `${80 * i}ms` }}>
-              <MessageCard
-                name={m.display_name}
-                text={m.message}
-                date={shortDate(m.created_at)}
-                verified={m.is_verified_supporter}
-              />
-            </div>
+          {messages.map((m) => (
+            <MessageCard
+              key={m.id}
+              name={m.display_name}
+              text={m.message}
+              date={shortDate(m.created_at)}
+              verified={m.is_verified_supporter}
+            />
           ))}
         </div>
       )}

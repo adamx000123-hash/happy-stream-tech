@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Heart, Menu, X } from "lucide-react";
+import { useSupportFlow } from "@/components/SupportFlow";
 
 const links = [
   { id: "hero", label: "الرئيسية" },

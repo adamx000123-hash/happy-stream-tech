@@ -9,10 +9,11 @@ import { SupportSection } from "@/components/SupportSection";
 import { MessagesSection } from "@/components/MessagesSection";
 import { GratitudeSection } from "@/components/GratitudeSection";
 import { FaqSection } from "@/components/FaqSection";
+import { SupportFlowProvider, useSupportFlow } from "@/components/SupportFlow";
 
-const title = "LEGEND — ساعدني على بناء محطة التداول الخاصة بي";
+const title = "ادعم هدف LEGEND — كل دعم يصنع فرقًا";
 const description =
-  "صفحة دعم شخصية لشراء حاسوب مخصص للتداول. دعم عبر USDT على شبكتي BEP20 و APTOS، مع رسائل الداعمين وأسئلة شائعة.";
+  "ساعدني على بناء محطة تداول أفضل، واختر شبكة الإرسال المناسبة بسهولة وأمان — USDT عبر BEP20 أو Aptos.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -33,6 +34,15 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  return (
+    <SupportFlowProvider>
+      <IndexContent />
+    </SupportFlowProvider>
+  );
+}
+
+function IndexContent() {
+  const support = useSupportFlow();
   const [entered, setEntered] = useState(false);
 
   return (
@@ -74,24 +84,24 @@ function Index() {
             className="reveal mx-auto mt-5 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base"
             style={{ animationDelay: "380ms" }}
           >
-            دعمك سيساعدني على شراء حاسوب مخصص لتداول الفوريكس، وعلى صناعة محتوى أفضل وأكثر انتظاماً.
-            لا ضغط ولا وعود مبالغ فيها — فقط امتنان صادق لكل من يقف بجانبي.
+            دعمك يساعدني على شراء حاسوب أفضل للتداول وصناعة محتوى أكثر جودة. كل دعم يتم بإرادتك
+            ويصنع فرقاً حقيقياً.
           </p>
 
           <div className="reveal mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row" style={{ animationDelay: "480ms" }}>
             <button
-              onClick={() => scrollToSection("support")}
+              onClick={() => support.open()}
               className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-8 text-base font-bold text-primary-foreground shadow-[var(--shadow-gold)] transition-transform hover:scale-[1.02] active:scale-95 sm:w-auto"
             >
               <Heart className="size-4" aria-hidden="true" />
-              أرغب في الدعم
+              ادعم الآن
             </button>
             <button
-              onClick={() => scrollToSection("community")}
+              onClick={() => scrollToSection("goal")}
               className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-border bg-secondary/60 px-8 text-base font-bold text-foreground transition-transform hover:scale-[1.02] active:scale-95 sm:w-auto"
             >
               <MessagesSquare className="size-4" aria-hidden="true" />
-              شاهد رسائل الداعمين
+              اقرأ عن الهدف
             </button>
           </div>
         </section>

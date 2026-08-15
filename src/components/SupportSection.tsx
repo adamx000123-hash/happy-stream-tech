@@ -1,7 +1,9 @@
-import { AlertTriangle } from "lucide-react";
+import { AlertTriangle, Heart } from "lucide-react";
+import { useSupportFlow } from "@/components/SupportFlow";
 import { WalletCard } from "@/components/WalletCard";
 
 export function SupportSection() {
+  const support = useSupportFlow();
   return (
     <section id="support" className="relative mx-auto max-w-4xl scroll-mt-24 px-5 py-16">
       <div className="text-center">
@@ -39,6 +41,16 @@ export function SupportSection() {
             address="0x7a3a37ee388044b59cc04eeba56a933f2323da744fa893c01d2c413725a3c3d8"
           />
         </div>
+      </div>
+
+      <div className="mt-8 flex justify-center">
+        <button
+          onClick={() => support.open()}
+          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-primary px-8 text-base font-bold text-primary-foreground shadow-[var(--shadow-gold)] transition-transform hover:scale-[1.02] active:scale-95"
+        >
+          <Heart className="size-4" aria-hidden="true" />
+          ادعم الآن
+        </button>
       </div>
     </section>
   );

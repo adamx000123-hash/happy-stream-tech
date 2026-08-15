@@ -17,6 +17,7 @@ export function scrollToSection(id: string) {
 }
 
 export function SiteNav() {
+  const support = useSupportFlow();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -62,7 +63,7 @@ export function SiteNav() {
 
         <div className="flex shrink-0 items-center gap-2">
           <button
-            onClick={() => go("support")}
+            onClick={() => support.open()}
             className="inline-flex min-h-11 items-center gap-2 rounded-full bg-primary px-4 text-sm font-bold text-primary-foreground shadow-[var(--shadow-gold)] transition-transform hover:scale-[1.03] active:scale-95"
           >
             <Heart className="size-4" />

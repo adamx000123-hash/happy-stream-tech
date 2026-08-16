@@ -449,7 +449,7 @@ export function SupportFlowProvider({ children }: { children: ReactNode }) {
       {isOpen && (
         <div
           dir="rtl"
-          className="fixed inset-0 z-[70] flex items-end justify-center overflow-y-auto bg-background/80 p-0 backdrop-blur-md sm:items-center sm:p-6"
+          className="fixed inset-0 z-[70] flex items-end justify-center bg-background/80 p-0 backdrop-blur-md sm:items-center sm:p-6"
         >
           <button
             aria-label="إغلاق"
@@ -461,10 +461,12 @@ export function SupportFlowProvider({ children }: { children: ReactNode }) {
             role="dialog"
             aria-modal="true"
             aria-labelledby="support-flow-title"
-            className="animate-fade-in relative w-full max-w-2xl rounded-t-3xl border border-border bg-card p-5 shadow-[var(--shadow-gold)] sm:rounded-3xl sm:p-7"
+            className="animate-fade-in relative flex max-h-[92dvh] w-full max-w-2xl flex-col overflow-hidden rounded-t-3xl border border-border bg-card shadow-[var(--shadow-gold)] sm:max-h-[88dvh] sm:rounded-3xl"
           >
-            <div className="mb-4 flex items-center justify-between gap-3">
-              <StepBar step={step} />
+            <div className="flex items-center justify-between gap-3 border-b border-border/60 bg-card/95 px-5 py-3 sm:px-7">
+              <div className="min-w-0 overflow-x-auto">
+                <StepBar step={step} />
+              </div>
               <button
                 onClick={close}
                 aria-label="إغلاق نافذة الدعم"
@@ -473,6 +475,9 @@ export function SupportFlowProvider({ children }: { children: ReactNode }) {
                 <X className="size-5" />
               </button>
             </div>
+
+            <div className="overflow-y-auto overscroll-contain px-5 py-5 sm:px-7 sm:py-6">
+
 
             {step === "network" && (
               <NetworkChoice

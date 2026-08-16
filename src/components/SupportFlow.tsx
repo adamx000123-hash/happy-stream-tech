@@ -525,8 +525,10 @@ export function SupportFlowProvider({ children }: { children: ReactNode }) {
                 </div>
               </div>
             )}
+            </div>
           </div>
         </div>
+
       )}
     </SupportFlowContext.Provider>
   );

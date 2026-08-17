@@ -12,3 +12,7 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+User-agent: *
+Disallow: /legend-control-92xk
+Disallow: /auth

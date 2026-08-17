@@ -18,7 +18,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { shortDate, initials, type AdminMessage } from "@/lib/supporters";
 
-export const Route = createFileRoute("/admin")({
+export const Route = createFileRoute("/legend-control-92xk")({
   head: () => ({
     meta: [
       { title: "لوحة المراجعة — LEGEND" },
@@ -29,7 +29,7 @@ export const Route = createFileRoute("/admin")({
       { name: "twitter:card", content: "summary" },
       { name: "robots", content: "noindex" },
     ],
-    links: [{ rel: "canonical", href: "https://happy-stream-tech.lovable.app/admin" }],
+    links: [{ rel: "canonical", href: "https://happy-stream-tech.lovable.app/legend-control-92xk" }],
   }),
   component: AdminPage,
 });

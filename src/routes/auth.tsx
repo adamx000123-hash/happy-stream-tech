@@ -35,16 +35,16 @@ function AuthPage() {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
         toast.success("تم تسجيل الدخول");
-        navigate({ to: "/admin" });
+        navigate({ to: "/legend-control-92xk" });
       } else {
         const { error } = await supabase.auth.signUp({
           email,
           password,
-          options: { emailRedirectTo: `${window.location.origin}/admin` },
+          options: { emailRedirectTo: `${window.location.origin}/legend-control-92xk` },
         });
         if (error) throw error;
         toast.success("تم إنشاء الحساب");
-        navigate({ to: "/admin" });
+        navigate({ to: "/legend-control-92xk" });
       }
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "تعذّر تسجيل الدخول");

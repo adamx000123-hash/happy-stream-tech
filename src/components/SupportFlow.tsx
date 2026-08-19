@@ -48,7 +48,7 @@ export const NETWORKS: Record<
   },
 };
 
-type Ctx = { open: (network?: NetworkId) => void };
+type Ctx = { open: (network?: NetworkId) => void; openMessage: () => void };
 const SupportFlowContext = createContext<Ctx | null>(null);
 
 export function useSupportFlow() {
@@ -441,7 +441,12 @@ export function SupportFlowProvider({ children }: { children: ReactNode }) {
     };
   }, [isOpen, close]);
 
-  const value = useMemo(() => ({ open }), [open]);
+  const openMessage = useCallback(() => {
+    setStep("form");
+    setIsOpen(true);
+  }, []);
+
+  const value = useMemo(() => ({ open, openMessage }), [open, openMessage]);
 
   return (
     <SupportFlowContext.Provider value={value}>

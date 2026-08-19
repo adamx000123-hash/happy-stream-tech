@@ -502,7 +502,10 @@ export function SupportFlowProvider({ children }: { children: ReactNode }) {
             )}
 
             {step === "form" && (
-              <MessageForm onBack={() => setStep("send")} onDone={() => setStep("done")} />
+              <MessageForm
+                onBack={() => (network ? setStep("send") : close())}
+                onDone={() => setStep("done")}
+              />
             )}
 
             {step === "done" && (

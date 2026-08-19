@@ -6,6 +6,6 @@ export type Track = {
 
 /** قائمة الموسيقى الخلفية — الأولى هي التي تبدأ تلقائياً. */
 export const tracks: Track[] = [
-  { title: "Relaxing Piano", src: pianoAsset.url },
+  { title: "Relaxing Piano", src: "/assets/relaxing-piano.mp3" },
   { title: "Relaxing Classical", src: "/assets/relaxing-classical.mp3" },
 ];

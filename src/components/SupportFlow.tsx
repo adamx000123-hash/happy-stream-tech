@@ -48,7 +48,7 @@ export const NETWORKS: Record<
   },
 };
 
-type Ctx = { open: (network?: NetworkId) => void };
+type Ctx = { open: (network?: NetworkId) => void; openMessage: () => void };
 const SupportFlowContext = createContext<Ctx | null>(null);
 
 export function useSupportFlow() {
@@ -441,7 +441,12 @@ export function SupportFlowProvider({ children }: { children: ReactNode }) {
     };
   }, [isOpen, close]);
 
-  const value = useMemo(() => ({ open }), [open]);
+  const openMessage = useCallback(() => {
+    setStep("form");
+    setIsOpen(true);
+  }, []);
+
+  const value = useMemo(() => ({ open, openMessage }), [open, openMessage]);
 
   return (
     <SupportFlowContext.Provider value={value}>
@@ -497,7 +502,10 @@ export function SupportFlowProvider({ children }: { children: ReactNode }) {
             )}
 
             {step === "form" && (
-              <MessageForm onBack={() => setStep("send")} onDone={() => setStep("done")} />
+              <MessageForm
+                onBack={() => (network ? setStep("send") : close())}
+                onDone={() => setStep("done")}
+              />
             )}
 
             {step === "done" && (
@@ -511,7 +519,7 @@ export function SupportFlowProvider({ children }: { children: ReactNode }) {
                 </p>
                 <div className="mt-6 flex flex-wrap justify-center gap-3">
                   <button
-                    onClick={() => setStep("send")}
+                    onClick={() => setStep(network ? "send" : "network")}
                     className="min-h-11 rounded-2xl border border-border px-5 text-sm font-bold text-foreground hover:bg-secondary/70"
                   >
                     العودة لصفحة الإرسال

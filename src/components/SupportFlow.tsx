@@ -519,7 +519,7 @@ export function SupportFlowProvider({ children }: { children: ReactNode }) {
                 </p>
                 <div className="mt-6 flex flex-wrap justify-center gap-3">
                   <button
-                    onClick={() => setStep("send")}
+                    onClick={() => setStep(network ? "send" : "network")}
                     className="min-h-11 rounded-2xl border border-border px-5 text-sm font-bold text-foreground hover:bg-secondary/70"
                   >
                     العودة لصفحة الإرسال

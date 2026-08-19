@@ -1,5 +1,3 @@
-import pianoAsset from "@/assets/relaxing-piano.mp3.asset.json";
-
 export type Track = {
   title: string;
   /** URL to an audio file served from the same deployment. */
